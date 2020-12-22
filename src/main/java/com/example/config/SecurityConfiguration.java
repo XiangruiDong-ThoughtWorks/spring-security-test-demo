@@ -1,6 +1,7 @@
 package com.example.config;
 
 import com.example.entity.Role;
+import com.example.service.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,17 +13,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    private final UserDetailsServiceImpl userDetailServiceImpl;
+
+    public SecurityConfiguration(UserDetailsServiceImpl userDetailsServiceImpl) {
+        this.userDetailServiceImpl = userDetailsServiceImpl;
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-            .passwordEncoder(new BCryptPasswordEncoder())
-                .withUser("user")
-                .password(new BCryptPasswordEncoder().encode("password"))
-                .authorities(String.valueOf(Role.USER))
-            .and()
-                .withUser("admin")
-                .password(new BCryptPasswordEncoder().encode("p@ssw0rd"))
-                .authorities(String.valueOf(Role.ADMIN));
+        auth.userDetailsService(userDetailServiceImpl).passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override
