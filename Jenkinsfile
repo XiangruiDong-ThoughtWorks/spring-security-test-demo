@@ -6,9 +6,7 @@ pipeline {
                 sh 'mvn --version'
                 sh 'mvn clean'
                 sh 'mvn package'
-                sh 'pwd'
-                sh 'ls'
-                sh 'java'
+                sh 'java -jar target/spring-security-test-demo-0.0.1-SNAPSHOT.jar'
             }
         }
     }
