@@ -3,12 +3,12 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                mvn --version
-                mvn clean
-                mvn package
-                pwd
-                ls
-                java
+                sh 'mvn --version'
+                sh 'mvn clean'
+                sh 'mvn package'
+                sh 'pwd'
+                sh 'ls'
+                sh 'java'
             }
         }
     }
