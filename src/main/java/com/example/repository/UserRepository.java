@@ -10,7 +10,7 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 
     User findUserByUsername(String username);
 
-    @Secured("ADMIN")
     @Override
+    @Secured("ROLE_ADMIN")
     <S extends User> S save(S s);
 }

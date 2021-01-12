@@ -31,9 +31,9 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> simpleGrantedAuthorityList = new LinkedList<>();
-        simpleGrantedAuthorityList.add(new SimpleGrantedAuthority(Role.USER.toString()));
+        simpleGrantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_" + Role.USER.toString()));
         if (role.equals(Role.ADMIN)) {
-            simpleGrantedAuthorityList.add(new SimpleGrantedAuthority(Role.ADMIN.toString()));
+            simpleGrantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_" + Role.ADMIN.toString()));
         }
         return simpleGrantedAuthorityList;
     }
